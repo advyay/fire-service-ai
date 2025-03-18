@@ -6,6 +6,11 @@ import uvicorn
 from fastapi import FastAPI, Query
 from sentence_transformers import SentenceTransformer
 import ollama
+import nltk
+
+# Manually download missing resources
+nltk.download("punkt")
+nltk.download("punkt_tab")  # Fix for Render
 
 # File paths
 faiss_index_path = "fire_service_faiss.index"
