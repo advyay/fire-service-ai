@@ -12,7 +12,7 @@ question = st.text_input("Enter your question:")
 
 # Query FastAPI
 if st.button("Ask AI") and question:
-    response = requests.get(f"http://localhost:8000/query", params={"question": question})
+    response = requests.get(f"https://fire-service-ai.onrender.com", params={"question": question})
     answer = response.json()["answer"]
     
     st.subheader("Answer:")
