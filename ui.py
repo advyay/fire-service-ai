@@ -12,8 +12,12 @@ question = st.text_input("Enter your question:")
 
 # Query FastAPI
 if st.button("Ask AI") and question:
-    response = requests.get(f"https://fire-service-ai.onrender.com", params={"question": question})
-    answer = response.json()["answer"]
+    try:
+        response = requests.get("https://fire-service-ai.onrender.com/query", params={"question": question})
+        response.raise_for_status()  # Ensure request was successful
+        answer = response.json().get("answer", "No answer received.")
+    except requests.exceptions.RequestException as e:
+        answer = f"Error connecting to API: {e}"
     
     st.subheader("Answer:")
     st.write(answer)
